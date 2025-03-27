@@ -1,3 +1,9 @@
+
+const alphabetUpperCase="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const alphabetLowerCase="abcdefghijklmnopqrstuvwxyz";
+    const numbers="0123456789";
+    const vowels="aeiou";
+    const consonants="bcdfghjklmnpqrstvwxyz";
 // 1️⃣ Macarena y la validación de contraseñas:
 // Crea una función validatePassword que reciba un objeto con una propiedad password (string) y devuelva un objeto con las propiedades isValid (boolean) y errors (array de strings) que indiquen si la contraseña cumple con los siguientes criterios:
 
@@ -22,9 +28,9 @@
 const validatePassword=({password})=>{
     // console.log(object.password);
 
-    const alphabetUpperCase="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const alphabetLowerCase="abcdefghijklmnopqrstuvwxyz";
-    const numbers="0123456789"
+    // const alphabetUpperCase="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    // const alphabetLowerCase="abcdefghijklmnopqrstuvwxyz";
+    // const numbers="0123456789"
 
     //definir objeto de salida
     const result={
@@ -164,7 +170,7 @@ evaluateStudents({
 const translateWords=({projectName,translator,words,dictionary})=>{
 
     let translated=[]
-    //NO SE PARA QUE QIERO DICTIONARY
+    //NO SE PARA QUE QUIERO DICTIONARY
 
     for (const word of words) {
         if(word==="hello"){
@@ -191,4 +197,125 @@ translateWords({
     translator: "Abby",
     words: ['hello', 'world'],
     dictionary: { hello: 'hola', world: 'mundo' }
+    });
+
+//4️⃣ Macarena y la clasificación de números:
+// Crea una función classifyNumbers que reciba un objeto numberAnalysis con:
+
+// taskName: Nombre de la tarea.
+
+// analyst: Nombre del analista.
+
+// numbers: Array de números a clasificar.
+
+// Debe imprimir un objeto con la tarea, el analista y dos arrays: números pares e impares.
+
+// // Ejemplo de entrada:
+// classifyNumbers({
+// taskName: "Number Classification",
+// analyst: "Macarena",
+// numbers: [1, 2, 3, 4, 5, 6]
+// });
+
+// // Ejemplo de salida:
+// {
+// taskName: "Number Classification",
+// analyst: "Macarena",
+// result: { even: [2, 4, 6], odd: [1, 3, 5] }
+// }
+
+const classifyNumbers=({taskName,analyst,numbers})=>{ //COMO ES QUE SABE LOS PARAMETROS DE CADA UNO SI NUNCA LO DEFINO?
+
+    // //objeto de entrada por partes
+    // const numberAnalysis={
+    //     taskName:"",
+    //     analyst:"",
+    //     numbers:[]
+    // }
+    let evenNumbers=[];
+    let oddNumbers=[];
+    
+    for (const number of numbers) {
+        if (number%2===0){
+            evenNumbers.push(number);
+        }else{
+            oddNumbers.push(number);
+        }
+        
+    }
+
+    //objeto de salida
+    const numberClassicifation={
+        taskName: taskName, //el mismo que recibio de entrada
+        analyst: analyst,//el mismo que recibio de entrada
+        result: { 
+            even: evenNumbers, 
+            odd: oddNumbers 
+        }
+    }
+
+    console.log(numberClassicifation);
+
+}
+classifyNumbers({
+    taskName: "Number Classification",
+    analyst: "Macarena",
+    numbers: [1, 2, 3, 4, 5, 6]
+    })
+
+//6️⃣ Macarena y la creación de perfiles aleatorios:
+// Crea una función generateProfiles que reciba un objeto profileTask con:
+
+// taskName: Nombre de la tarea.
+
+// creator: Nombre del creador.
+
+// count: Número de perfiles a generar.
+
+// Debe devolver un objeto con los perfiles generados, donde cada perfil tiene un id único (número aleatorio entre 1000 y 9999) y un username generado combinando una vocal, una consonante y un número aleatorio entre 1 y 99.
+
+// // Ejemplo de entrada:
+// generateProfiles({
+// taskName: "Profile Generation",
+// creator: "Macarena",
+// count: 5
+// });
+
+// // Ejemplo de salida:
+// {
+// taskName: "Profile Generation",
+// creator: "Macarena",
+// profiles: [
+// { id: 4532, username: 'PA12' },
+// { id: 8753, username: 'LO35' },
+// { id: 9123, username: 'KE78' },
+// { id: 3264, username: 'BU99' },
+// { id: 1742, username: 'PI23' }
+// ]
+// }
+
+const generateProfiles=({taskName,creator,count})=>{
+
+    //array de objetos
+    const profiles=[];//array donde guardare user name random
+    for (let i = 0; i <=count; i++) {
+        const id=Math.floor(Math.random()*(9999-1000)+1000);
+        const randomConsonant=consonants[Math.floor(Math.random() * consonants.length)];
+        const randomVowel=vowels[Math.floor(Math.random() * vowels.length)];
+        const username=`${randomConsonant}${randomVowel}${Math.floor(Math.random()*99)+1}`;
+        profiles.push({id,username});
+    }
+    
+    //objeto de salida
+    const generatedProfiles={
+        taskName: taskName,
+        creator: creator,
+        profiles: profiles
+    }
+    console.log(generatedProfiles);
+}
+generateProfiles({
+    taskName: "Profile Generation",
+    creator: "Macarena",
+    count: 5
     });
