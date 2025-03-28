@@ -25,52 +25,34 @@ const alphabetUpperCase="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 // "Password must contain at least one lowercase letter.",
 // "Password must contain at least one number."
 
-const validatePassword=({password})=>{
-    // console.log(object.password);
-
-    // const alphabetUpperCase="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    // const alphabetLowerCase="abcdefghijklmnopqrstuvwxyz";
-    // const numbers="0123456789"
-
-    //definir objeto de salida
+const validatePassword=(data)=>{ //defino el contenido de data hasta que lo llamo
+  
     const result={
         isValid: false,
         errors: []
     }
 
     //condiciones del objeto de salida
-    if (password.length<8){
-        result.errors.push("Password must be at least 8 characters long.");
+    if (data.password.length<8){ //lee la data que entro
+        result.errors.push("Password must be al least 8 characters long");
     }
-    //condiciones de mayusculas, minusculas y numero
-
-    let hasUpperCase=false; //por que no las lee?
-    let hasLowerCase=false;
-    let hasNumber=false;
-
-    for (const letters of password) {
-        if(alphabetLowerCase.includes(letters)){
-            hasLowerCase=true;}
-        if (alphabetUpperCase.includes(letters)){
-            hasUpperCase=true;}
-        if (!numbers.includes(letters)){
-            hasNumber=true;}
+    
+    //VERSION CORTA
+    if(!/[A-Z]/.test(data.password)){ //siempre plantear la comparativa en negativo
+        result.errors.push("Password must contain at least one uppercase letter.");
     }
 
-    if(hasUpperCase=false){
-        result.errors.push("Password must contain at least one uppercase letter.")
-    }
-    if(hasLowerCase=false){
-        result.errors.push("Password must contain at least one lowercase letter.")
-    }
-    if(hasNumber=false){
-        result.errors.push("Password must contain at least one number.")
+    if(!/[a-z]/.test(data.password)){
+        result.errors.push("Password must contain at least one lowercase letter.");
     }
 
+    if(!/[0-9]/.test(data.password)){
+        result.errors.push("Password must contain at least one number.");
+    }
 
-    result.isValid = result.errors.length === 0;
-
-console.log({result});
+    result.isValid = result.errors.length === 0; //no te tuviste que meter con isValid hasta lo ultimo
+   
+console.log(result);
 };
 validatePassword({password:"aAbEo123"});
 validatePassword({password:"aAbEo1"});
@@ -167,29 +149,25 @@ evaluateStudents({
 // translated: [ 'hola', 'mundo' ]
 // }
 
-const translateWords=({projectName,translator,words,dictionary})=>{
-
+const translateWords=(data)=>{
+//{projectName,translator,words,dictionary}
     let translated=[]
-    //NO SE PARA QUE QUIERO DICTIONARY
 
-    for (const word of words) {
-        if(word==="hello"){
-            translated.push('hola');
-        }
-        if(word==="world"){
-            translated.push('mundo');
-        }
-        
+    for (const word of data.words) {
+        data.dictionary[word]; // acceso indexado
+        //analiza el primer word "hello", luego le digo lo cambie por el string asignado a esa misma palabra=>hello:hola
+        //esto funciona por que se llaman igual, sino no lo podria leer
+        translated.push(data.dictionary[word]); //le pido que imprima ese cambio
     }
 
     //objeto de salida
     const result={
-    projectName: projectName,
-    translator: translator,
+    projectName: data.projectName,
+    translator: data.translator,
     translated: translated
     }
 
-    console.log({result});
+    console.log(result);
 }
 
 translateWords({
