@@ -413,3 +413,54 @@ const classifyAges = info => {
   );
 };
 classifyAges({ ages: [5, 12, 15, 19, 32, 7, 17] });
+
+//6️⃣ Cambiar el estado de un semáforo. Objeto con state, elije uno de los tres ("red", "yellow", "green"). Pasar de red a green, luego a yellow, y de yellow a red, cíclicamente.
+
+// Ejemplo de entrada: changeTrafficLight({state: 'red'});
+// Ejemplo de salida: "El semáforo cambió a yellow"
+
+// Actualizar la propiedad state según el color actual y mostrar: "El semáforo cambió a ..."
+const changeTrafficLight = trafficLight => {
+  
+  //objeto de salida (no necesita por que solo vamos a cambiar el estado de lo que hay)
+
+  if(trafficLight.state==='red'){
+    trafficLight.state='green';
+  }else if(trafficLight.state==='green'){
+    trafficLight.state='yellow';
+  }else if(trafficLight.state==='yellow'){
+    trafficLight.state='red';
+  }
+  console.log(`El semáforo cambió a ${trafficLight.state}`);
+
+};
+changeTrafficLight({ state: 'red' });
+changeTrafficLight({ state: 'green' });
+changeTrafficLight({ state: 'yellow' });
+
+//7️⃣ Bego y la combinación de listas:
+// Crea una función combineLists que reciba un objeto listCombiner con:
+
+// names: Array de nombres.
+
+// surnames: Array de apellidos.
+
+// Debe devolver un objeto con todas las combinaciones posibles entre nombres y apellidos.
+
+// Ejemplo de entrada: combineLists({names: ['Alice', 'Bob'], surnames: ['Smith', 'Johnson']});
+
+// Ejemplo de salida: {combinations: [ 'Alice Smith', 'Alice Johnson', 'Bob Smith', 'Bob Johnson' ]}  
+
+const combineLists=(data)=>{
+
+  //objeto de salida
+  const combinations = [];
+  
+  data.names.forEach(name=>{ //recorre el array de nombres
+   combinations.push(`${name} ${data.surnames[0]}`); //le sumo el apellido
+   combinations.push(`${name} ${data.surnames[1]}`); //le sumo el apellido
+    
+  });
+  console.log(`Combinations: ${combinations}`);
+}
+combineLists({ names: ['Alice', 'Bob'], surnames: ['Smith', 'Johnson'] });
